@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    .slider-panel {
+        background-color: #fcc688;
+        height: 300px;
+        width: 400px;
+        padding: 20px;
+    }
+
+    .slider-panel .slider-box {
+        background-color: red;
+        margin-top: 40px;
+        display: inline-block;
+        width: 305px;
+        height: 6px;
+        position: relative;
+    }
+
+    /* 滑块划过的宽度，默认值为0 */
+    .slider-panel .slider-box .slider-value {
+        background-color: blue;
+        height: 6px;
+        width: 0;
+    }
+
+    /* 滑条的样式。默认透明 */
+    .slider-panel input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        -webkit-appearance: none;
+        -ms-appearance: none;
+        background: transparent;
+        width: 305px;
+        height: 2px;
+        outline: none;
+    }
+
+    /* 滑块圆形的样式 */
+    .slider-panel input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        height: 24px;
+        width: 24px;
+        background-color: #333333;
+        border-radius: 50%;
+    }
+</style>
+
+<body>
+    <div class="slider-panel">
+        <!--slider-box表示整个滑块的颜色  -->
+        <div class="slider-box">
+            <!--slider-value表示滑块划过后的部分用一个颜色显示覆盖slider-box的颜色达到进度作用  -->
+            <p class="slider-value"></p>
+            <!-- 滑块的背景颜色透明只有-->
+            <input type="range" min="0" step="1" max="100" value="0">
+        </div>
+        <p><span class='slider-percentage'>0</span>%</p>
+    </div>
+    </div>
+</body>
+<script>
+    //绑定鼠标滑动事件
+    $(' .slider-panel input').on('mousemove touchmove touchend click', moveSlider)
+    function moveSlider() {
+        // 获取当前滑块的动态值
+        let sliderValue = parseInt($(this).val());
+        // 将滑块的值赋值给滑块划过后p标签的宽度
+        $('.slider-value').css('width', sliderValue + '%');
+        // 显示当前滑块的动态值
+        $('.slider-percentage').text(sliderValue);
+    }
+</script>
+
+</html>
